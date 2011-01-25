@@ -1,0 +1,94 @@
+@charset "utf-8";
+/* vim: set ft=css fdm=indent: */
+
+@border-w: thin;
+@border-r: .2em;
+@space: .1em;
+@bg-color: white;
+@item-color: #AFC7D0;
+
+.encapsulating-textarea
+{
+    .round-border
+    {
+        border-radius: @border-r;
+        -moz-border-radius: @border-r;
+        -webkit-border-radius: @border-r;
+    }
+
+
+    /* pretend to be a textarea */
+    background-color: @bg-color;
+    display: block;
+    border: black solid thin;
+    overflow: auto;
+    resize: auto;
+    cursor: text;
+
+    &.debug
+    {
+        background-color: #ddd;
+    }
+
+    a,
+    input
+    {
+        display: block;
+        float: left;
+        margin:  @space;
+        padding: @space;
+        line-height: 1 + 2*@space;
+        border: none;
+        outline: none;
+        font-size: 1em;
+    }
+
+    a
+    {
+        color: inherit;
+        text-decoration: none;
+        background-color: @item-color;
+        border: #616C5E solid @border-w;
+        white-space: nowrap;
+        .round-border;
+        cursor: text;
+
+        &:hover
+        {
+            background-color: @item-color + #111;
+
+            .remove
+            {
+                color: inherit;
+            }
+        }
+
+        &:focus,
+        &:active
+        {
+            background-color: @item-color + #222;
+        }
+
+        .remove
+        {
+            cursor: default;
+            font-size: .8em;
+            color: #666;
+            margin-left: .25em;
+        }
+    }
+
+    input
+    {
+        border: @bg-color solid @border-w;
+        resize: none;
+        width: .5em;
+
+        /* simulated :focus for IE<8 */
+        &.focus
+        {
+            width: 10em;
+        }
+    }
+}
+
