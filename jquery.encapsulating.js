@@ -2,13 +2,13 @@
 //
 // * author: Marek 'saji' Augustynowicz
 // * license: MIT (LICENSE.md file should be distributed with the code)
-// * http://github.com/marek-saji/jquery-encapsulating
+// * http://github.com/marek-saji/jquery.encapsulating
 //
 // == USAGE ==
 // {{{
-// <link rel="stylesheet" type="text/cxx" href="jquery-encapsulating.css" />
+// <link rel="stylesheet" type="text/cxx" href="jquery.encapsulating.css" />
 // <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
-// <script type="text/javascript" src="jquery-encapsulating.js"></script>
+// <script type="text/javascript" src="jquery.encapsulating.js"></script>
 // <script type="text/javascript">
 //    $(function(){
 //        $('textarea.foo').encapsulating();
