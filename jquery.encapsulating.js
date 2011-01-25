@@ -28,11 +28,6 @@
 // </textarea>
 //
 // }}}
-//
-// == TODO ==
-// * make it work in IE
-// * make it work with autoexpandable
-// * make it possible to choose separator other than comma
 
 
 (function($){ // context scope begin
