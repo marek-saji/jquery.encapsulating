@@ -6,7 +6,7 @@
 //
 // == USAGE ==
 // {{{
-// <link rel="stylesheet" type="text/cxx" href="jquery.encapsulating.css" />
+// <link rel="stylesheet" type="text/css" href="jquery.encapsulating.css" />
 // <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
 // <script type="text/javascript" src="jquery.encapsulating.js"></script>
 // <script type="text/javascript">
@@ -34,13 +34,13 @@
 
     // == {{{default_settings}}} ==
     var default_settings = {
-        // text to display at "delete item" buttom
+        // Text to display at button that deletes an item.
         removeText: '×',
-        // value of "delete item" buttom title attribute
+        // Value of title attribute of a button that deletes an item.
         removeTitle: '',
-        // vaue of item title attribute
+        // Value of item title attribute.
         editTitle: '',
-        // in debug mode, textarea element is visible,
+        // When debug is enabled, original textarea element is visible.
         debug: false
     };
 

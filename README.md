@@ -1,14 +1,14 @@
-textarea encapsulating jQuery plugin
-====================================
+encapsulating textarea, jQuery plugin
+=====================================
 
-You can usually see this in in tag fields.
+You can usually see this in in tag fields. Also known as token-field.
 
 Usage
 -----
 
-    <script type="text/javascript" src="jquery.encapsulating.js"></script>
-    <link rel="stylesheet" type="text/cxx" href="jquery.encapsulating.css" />
+    <link rel="stylesheet" type="text/css" href="jquery.encapsulating.css" />
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="jquery.encapsulating.js"></script>
     <script type="text/javascript">
        $(function(){
            $('textarea').encapsulating();
