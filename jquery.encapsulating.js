@@ -176,6 +176,7 @@
                         "-moz-resize": $textarea.css('-moz-resize')
                     }
                 })
+                .data('encapsulating', {})
                 // ==== sync encapsulated items to hidden textarea ====
                 .bind('syncToTextarea.encapsulating', function(){
                     var $area = $(this);
@@ -480,12 +481,12 @@
 
             $('*', $area[0])
                 .live('focus', function(e){
+                    clearTimeout($area.data('encapsulating').focusTimeout);
                     $area.addClass('focus');
                 })
                 .live('blur', function(e){
-                    setTimeout(function(){
-                        if (!$area.find(':focus').length)
-                            $area.removeClass('focus');
+                    $area.data('encapsulating').focusTimeout = setTimeout(function(){
+                        $area.removeClass('focus');
                     }, 100);
                 });
 
