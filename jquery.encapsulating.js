@@ -88,16 +88,16 @@
             }
             else // IE
             {
-                var r = document.selection.createRange().duplicate();
+                var bm = document.selection.createRange().getBookmark(),
+                    s  = input.createTextRange(),
+                    s2 = input.createTextRange();
 
-                r.moveEnd('character', input.value.length);
-                if (r.text == '')
-                    position.start = input.value.length;
-                else
-                    position.start = input.value.lastIndexOf(r.text);
+                s.moveToBookmark(bm);
+                s2.collapse(true);
+                s2.setEndPoint("EndToStart", s);
 
-                r.moveStart('character', -input.value.length);
-                position.end = r.text.length;
+                position.start = s2.text.length;
+                position.end = position.start + s.text.length;
             }
             position.length = position.end - position.start;
 
