@@ -249,12 +249,11 @@
                         })
                         .appendTo($item);
 
-                        $item.insertBefore($input);
+                        $item.insertBefore($input_wrapper);
                     }
 
-                    $input
+                    $input_wrapper
                         .detach()
-                        .width('')
                         .appendTo($area);
 
                     // scroll to left bottom
@@ -267,24 +266,35 @@
                 }); // push.encapsulating event
 
             // === input field ===
-            var $input = $('<input />')
+            var $input_wrapper = $('<div />', {
+                    'class': 'encapsulating_input_wrapper'
+                }),
+                $input_sizer = $('<span />', {
+                    'class': 'encapsulating_input_sizer'
+                }),
+                $input = $('<input />',{
+                    'size': 1
+                })
                 .data('encapsulating', {})
                 // ==== input keypress ====
                 .bind('keypress.encapsulating keydown.encapsulating', function(e){
-                    var key = toolbox.transEventKey(e);
+                    var key = toolbox.transEventKey(e),
+                        $input = $(this);
+
+                    if (settings.debug)
+                        console.debug('encapsulating:', 'input', key);
 
                     switch (key)
                     {
                         // ===== space =====
                         // drop spaces at the begining of input
                         case 'keypress:32':
-                            var $input = $(this);
                             if (!$input.val())
                                 e.preventDefault();
                             break;
                         // ===== comma (,), right, tab, enter, escape =====
                         // edit next item
-                        case 'keypress:188': // ,
+                        case 'keydown:188': // ,
                             e.preventDefault();
                         case 'keydown:39': // right
                             if (!toolbox.cursorAtEnd(this))
@@ -292,8 +302,7 @@
                         case 'keypress:9': // tab
                         case 'keypress:13': // enter
                         case 'keydown:27': // esc
-                            var $input = $(this),
-                                $next = $input.next();
+                            var $next = $input_wrapper.next();
 
                             // tabe key and input was at the end
                             // allow normally focus next item on page
@@ -320,7 +329,7 @@
                                 // comma and input was not at the end
                                 if ($next.length && key == 188)
                                 {
-                                    $input
+                                    $input_wrapper
                                         .detach()
                                         .insertBefore($next);
                                 }
@@ -334,11 +343,8 @@
                         case 'keydown:37': // left
                             if (!toolbox.cursorAtStart(this))
                                 break;
-                        case 'shift9': // shift + tab
                             e.preventDefault();
-                            var $input = $(this),
-                                $prev = $input.prev();
-                            $input.blur();
+                            var $prev = $input_wrapper.prev();
                             toolbox.focus($prev, $input);
                             break;
 
@@ -346,8 +352,7 @@
                             if (toolbox.cursorAtStart(this))
                             {
                                 e.preventDefault();
-                                var $input = $(this),
-                                    $prev = $input.prev();
+                                var $prev = $input_wrapper.prev();
                                 /*
                                 $input.val($prev.text());
                                 $prev.remove();
@@ -358,11 +363,18 @@
                             break;
 
                     }
+                    $input_sizer.text($input.val()+'#jF');
                 }) // input keypress
+                .bind('keyup.encapsulating', function(e){
+                    $input_sizer.text($input.val()+'#jF');
+                }) // input keyup
                 // ==== input focus ====
                 // store previous value
                 .bind('focus.encapsulating', function(e){
+                    if (settings.debug)
+                        console.debug('encapsulating:', 'input', e.type);
                     var $input = $(this);
+                    $input_sizer.text($input.val()+'#jF');
                     $input
                         .addClass('focus')
                         .data('encapsulating').prevVal = $input.val();
@@ -370,10 +382,13 @@
                 // ==== input blur ====
                 // encapsulate current value
                 .bind('blur.encapsulating', function(e){
+                    if (settings.debug)
+                        console.debug('encapsulating:', 'input', e.type);
                     e.preventDefault();
                     var $input = $(this);
                     $input.removeClass('focus');
                     $area.trigger('push.encapsulating', [$input]);
+                    $input_sizer.text($input.val()+'#jF');
 
                 }); // input blur
 
@@ -386,22 +401,28 @@
                 $area.trigger('syncFromTextarea.encapsulating');
             });
             $area.insertAfter($textarea);
-            $input.appendTo($area);
+            $input_wrapper.appendTo($area);
+            $input_sizer.add($input).appendTo($input_wrapper);
 
             // === encapsulated item ===
             // bind events to all future created items
+
+            if (settings.debug)
+            {
+                $('a', $area[0]).live('focus.encapsulated blur.encapsulated', function(e){
+                    console.debug('encapsulating:', 'item', e.type, $(this).children('.text').text());
+                });
+            }
 
             $('a', $area[0])
                 // ==== encapsulated item edit ====
                 .live('click.encapsulating edit.encapsulating', function(e){
                     e.preventDefault();
                     var $this = $(this);
-                    $input
-                            .detach()
-                            .width($this.width())
-                            .val($this.children('.text').text())
-                            .insertAfter($this)
-                            .focus();
+                    $input_wrapper.detach();
+                    $input.val($this.children('.text').text());
+                    $input_wrapper.insertAfter($this);
+                    $input.focus();
                     if ($.browser.msie)
                     {
                         // HACK apparently IE really needs to focus
@@ -415,15 +436,23 @@
 
                     switch (key)
                     {
-                        case 'keypress:shift+9': // shift+8
+                        case 'keypress:shift+9': // shift+tab
                         case 'keydown:37': // left
                             e.preventDefault();
-                            $(this).prev().focus();
+                            var $prev = $(this).prev();
+                            if ($prev.is('.encapsulating_input_wrapper'))
+                                $input.focus();
+                            else
+                                $prev.focus();
                             break;
                         case 'keypress:9': // tab
                         case 'keydown:39': // right
                             e.preventDefault();
-                            $(this).next().focus();
+                            var $next = $(this).next();
+                            if ($next.is('.encapsulating_input_wrapper'))
+                                $input.focus();
+                            else
+                                $next.focus();
                             break;
                         case 'keydown:113': // F2
                             e.preventDefault();
@@ -439,6 +468,17 @@
                                 .remove();
                     }
                 }); // a keypress
+
+            $('*', $area[0])
+                .live('focus', function(e){
+                    $area.addClass('focus');
+                })
+                .live('blur', function(e){
+                    setTimeout(function(){
+                        if (!$area.find(':focus').length)
+                            $area.removeClass('focus');
+                    }, 100);
+                });
 
             // ==== encapsulated item remove ====
             $('a > .remove', $area[0])

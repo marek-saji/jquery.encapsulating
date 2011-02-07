@@ -25,12 +25,20 @@
     resize: auto;
     cursor: text;
 
+    &.focus
+    {
+        box-shadow: 0 0 1em @item-color;
+        -moz-box-shadow: 0 0 1em @item-color;
+        -webkit-box-shadow: 0 0 1em @item-color;
+    }
+
     &.debug
     {
         background-color: #ddd;
     }
 
     a,
+    .encapsulating_input_wrapper,
     input
     {
         display: block;
@@ -78,16 +86,28 @@
         }
     }
 
-    input
+    .encapsulating_input_wrapper
     {
-        border: @bg-color solid @border-w;
-        resize: none;
-        width: .5em;
+        max-width: 90%; /* unsafe setting, this should left space for INPUT_SIZER_SUFFIX */
+        margin: 0;
+        padding: 0;
+        border: 0;
+        outline: 0;
 
-        /* simulated :focus for IE<8 */
-        &.focus
+        .encapsulating_input_sizer
         {
-            width: 10em;
+            height: 0;
+            max-width: 90%; /* unsafe setting, this should left space for INPUT_SIZER_SUFFIX */
+            overflow: hidden;
+            display: block;
+            white-space: pre;
+        }
+
+        input
+        {
+            border: @bg-color solid @border-w;
+            background-color: @bg-color;
+            width: 100%;
         }
     }
 }
