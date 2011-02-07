@@ -493,7 +493,10 @@
                 }); // a > .remove click
 
             // === encapsulate existing textarea contents ===
-            $area.trigger('syncFromTextarea.encapsulating');
+            $area
+                .trigger('syncFromTextarea.encapsulating')
+                .scrollLeft(0)
+                .scrollTop(0);
 
             // === focus input field ===
             // if textarea had focus
