@@ -62,52 +62,53 @@
             return key;
         }, // toolbox.transEventKey
 
-        // === {{{toolbox.cursorAtStart}}} ===
-        // checks whether cursor is at the begining of given input
+        // === {{{toolbox.selectionPosition}}} ===
+        // checks position of selection in given input
         //
-        // Params:
+        // Params
         // * input (DOM or jQuery object)
-        cursorAtStart: function(input) {
+        //
+        // Returns object with `start`, `end` and `length`
+        selectionPosition: function(input) {
             if (input instanceof $)
-                input = [0];
+                input = input[0];
+
+            var position = {
+                start: undefined,
+                end: undefined,
+                atStart: false,
+                atEnd: false,
+                length: undefined
+            };
 
             if (!input.createTextRange)
             {
-                var start = input.selectionStart;
+                position.start = input.selectionStart;
+                position.end = input.selectionEnd;
             }
-            else
+            else // IE
             {
                 var r = document.selection.createRange().duplicate();
+
                 r.moveEnd('character', input.value.length);
                 if (r.text == '')
-                    var start = input.value.length;
+                    position.start = input.value.length;
                 else
-                    var start = input.value.lastIndexOf(r.text);
-            }
-            return 0 == start;
-        }, // toolbox.cursorAtStart
+                    position.start = input.value.lastIndexOf(r.text);
 
-        // === {{{toolbox.cursorAtEnd}}} ===
-        // checks whether cursor is at the end of given input
-        //
-        // Params:
-        // * input (DOM or jQuery object)
-        cursorAtEnd: function(input) {
-            if (input instanceof $)
-                input = [0];
+                r.moveStart('character', -input.value.length);
+                position.end = r.text.length;
+            }
+            position.length = position.end - position.start;
 
-            if (!input.createTextRange)
+            if (0 == position.length)
             {
-                var end = input.selectionEnd;
+                position.atStart = 0 == position.start;
+                position.atEnd = input.value.length == position.end;
             }
-            else
-            {
-                var r = document.selection.createRange().duplicate();
-                r.moveStart('character', -this.value.length);
-                var end = r.text.length;
-            }
-            return input.value.length == end;
-        } // toolbox.cursorAtEnd
+
+            return position;
+        }, // toolbox.selectionPosition
 
         // === {{{toolbox.focus}}} ====
         // on non-problematic browsers, just focus
@@ -297,7 +298,7 @@
                         case 'keydown:188': // ,
                             e.preventDefault();
                         case 'keydown:39': // right
-                            if (!toolbox.cursorAtEnd(this))
+                            if (!toolbox.selectionPosition($input).atEnd)
                                 break;
                         case 'keypress:9': // tab
                         case 'keypress:13': // enter
@@ -341,7 +342,7 @@
                         // ===== left, shift+tab, backspace =====
                         // edit previous item
                         case 'keydown:37': // left
-                            if (!toolbox.cursorAtStart(this))
+                            if (!toolbox.selectionPosition(this).atStart)
                                 break;
                             e.preventDefault();
                             var $prev = $input_wrapper.prev();
@@ -349,7 +350,7 @@
                             break;
 
                         case 'keydown:8': // backspace
-                            if (toolbox.cursorAtStart(this))
+                            if (toolbox.selectionPosition(this).atStart)
                             {
                                 e.preventDefault();
                                 var $prev = $input_wrapper.prev();
