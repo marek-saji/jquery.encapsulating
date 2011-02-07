@@ -247,7 +247,7 @@
                         $('<span />', {
                             'class': 'remove',
                             text: settings.removeText,
-                            title: settings.removeLabel,
+                            title: settings.removeLabel
                         })
                         .appendTo($item);
 
