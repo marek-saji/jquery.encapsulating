@@ -122,7 +122,7 @@
             if ($el.is('.encapsulating_input_wrapper'))
                 $el = $input;
 
-           if (!$.browser.msie)
+           if (!$.browser.msie && !$.browser.opera)
                $el.focus();
            else
            {
@@ -301,12 +301,15 @@
                         case 'keydown:39': // right
                             if (!toolbox.selectionPosition($input).atEnd)
                                 break;
-                        case 'keypress:9': // tab
+                        case 'keydown:9': // tab (only for IE and Opera)
                         case 'keypress:13': // enter
                         case 'keydown:27': // esc
+                            if (9 == e.keyCode && !$.browser.msie && !$.browser.opera)
+                                break;
+
                             var $next = $input_wrapper.next();
 
-                            // tabe key and input was at the end
+                            // tab key and input was at the end
                             // allow normally focus next item on page
                             if (9 == e.keyCode && !$next.length)
                                 break;
@@ -345,6 +348,10 @@
                         case 'keydown:37': // left
                             if (!toolbox.selectionPosition(this).atStart)
                                 break;
+                        case 'keydown:shift+9': // shift+tab (only for IE and Opera)
+                            if (9 == e.keyCode && !$.browser.msie && !$.browser.opera)
+                                break;
+
                             e.preventDefault();
                             var $prev = $input_wrapper.prev();
                             toolbox.focus($prev, $input);
