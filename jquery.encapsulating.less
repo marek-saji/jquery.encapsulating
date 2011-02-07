@@ -5,15 +5,21 @@
 @border-r: .2em;
 @space: .1em;
 @bg-color: white;
-@item-color: #AFC7D0;
+@item-color: #BFD7F0;
 
 .encapsulating-textarea
 {
-    .round-border
+    .round-border(@radius: @border-r)
     {
-        border-radius: @border-r;
-        -moz-border-radius: @border-r;
-        -webkit-border-radius: @border-r;
+        border-radius: @radius;
+        -moz-border-radius: @radius;
+        -webkit-border-radius: @radius;
+    }
+
+    .resize(@val: auto)
+    {
+        resize: @val;
+        -moz-resize: @val;
     }
 
 
@@ -22,7 +28,7 @@
     display: block;
     border: black solid thin;
     overflow: auto;
-    resize: auto;
+    .resize(auto);
     cursor: text;
 
     &.focus
@@ -63,7 +69,7 @@
 
         &:hover
         {
-            background-color: @item-color + #111;
+            background-color: @item-color - #111;
 
             .remove
             {
@@ -107,6 +113,7 @@
         {
             border: @bg-color solid @border-w;
             background-color: @bg-color;
+            .resize(none);
             width: 100%;
         }
     }

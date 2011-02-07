@@ -172,7 +172,8 @@
                              + (settings.debug ? ' debug' : ''),
                     // inherit textarea-specific css properties
                     css: {
-                        resize: $textarea.css('resize')
+                        "resize": $textarea.css('resize'),
+                        "-moz-resize": $textarea.css('-moz-resize')
                     }
                 })
                 // ==== sync encapsulated items to hidden textarea ====
