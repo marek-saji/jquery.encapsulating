@@ -45,7 +45,6 @@
     };
 
 
-
     // == {{{toolbox}}} ==
     // some utility functions
     var toolbox = {
@@ -109,6 +108,27 @@
             }
             return input.value.length == end;
         } // toolbox.cursorAtEnd
+
+        // === {{{toolbox.focus}}} ====
+        // on non-problematic browsers, just focus
+        //
+        // Params:
+        // * $el (jQuery)
+        focus: function($el, $blur_el) {
+            if (typeof $blur_el != 'undefined')
+                $blur_el.blur();
+
+            if ($el.is('.encapsulating_input_wrapper'))
+                $el = $input;
+
+           if (!$.browser.msie)
+               $el.focus();
+           else
+           {
+               // HACK apparently IE really needs to focus
+               setTimeout(function(){ $el.focus(); }, 10);
+           }
+        } // toolbox.focus
 
     }; // var toolbox
 
@@ -293,7 +313,7 @@
                             // tab or right key and input was not at the end
                             if ($next.length && (e.keyCode == 9 || e.keyCode == 39))
                             {
-                                $next.focus();
+                                toolbox.focus($next, $input);
                             }
                             else
                             {
@@ -304,7 +324,7 @@
                                         .detach()
                                         .insertBefore($next);
                                 }
-                                $input.focus();
+                                toolbox.focus($input);
                             }
 
                             break;
@@ -319,7 +339,7 @@
                             var $input = $(this),
                                 $prev = $input.prev();
                             $input.blur();
-                            $prev.focus();
+                            toolbox.focus($prev, $input);
                             break;
 
                         case 'keydown:8': // backspace
