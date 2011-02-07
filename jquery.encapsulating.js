@@ -284,7 +284,7 @@
                         $input = $(this);
 
                     if (settings.debug)
-                        console.debug('encapsulating:', 'input', key);
+                        console.log('encapsulating:', 'input', key);
 
                     switch (key)
                     {
@@ -374,7 +374,7 @@
                 // store previous value
                 .bind('focus.encapsulating', function(e){
                     if (settings.debug)
-                        console.debug('encapsulating:', 'input', e.type);
+                        console.log('encapsulating:', 'input', e.type);
                     var $input = $(this);
                     $input_sizer.text($input.val()+'#jF');
                     $input
@@ -385,7 +385,7 @@
                 // encapsulate current value
                 .bind('blur.encapsulating', function(e){
                     if (settings.debug)
-                        console.debug('encapsulating:', 'input', e.type);
+                        console.log('encapsulating:', 'input', e.type);
                     e.preventDefault();
                     var $input = $(this);
                     $input.removeClass('focus');
@@ -412,7 +412,7 @@
             if (settings.debug)
             {
                 $('a', $area[0]).live('focus.encapsulated blur.encapsulated', function(e){
-                    console.debug('encapsulating:', 'item', e.type, $(this).children('.text').text());
+                    console.log('encapsulating:', 'item', e.type, $(this).children('.text').text());
                 });
             }
 
