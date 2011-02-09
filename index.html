@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset=utf-8 />
+
+        <title>encapsulating textarea, a jQuery plugin</title>
+        <meta name=description content="Tokens field jQuery plugin (a.k.a. typeahead). Perfect for tag input fields." />
+        <meta name=keywords content="jquery, plugin, tokens, input, forms, typeahead, encapsulating" />
+
+        <link rel="stylesheet" type="text/css" href="jquery.encapsulating.css" />
+
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+        <script type="text/javascript" src="jquery.encapsulating.js"></script>
+
+        <style type="text/css">
+            html, body { font-family: sans-serif; }
+            footer .fork-me img
+            {
+                border: 0;
+                position: fixed;
+                top: 0;
+                right: 0;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <header>
+            <hgroup>
+                <h1>encapsulating textarea</h1>
+                <h2>a jQuery plugin</h2>
+            </hgroup>
+        </header>
+
+        <p>
+            You can usually see these in tag input fields.
+            Also known as <q>token fields</q> and
+            <q>typeahead</q> (in connection with autocomplete).
+        </p>
+
+
+        <section id="get">
+            <ul>
+                <li>
+                    <a href="https://github.com/marek-saji/jquery.encapsulating/archives/master">download</a>
+                </li>
+                <li>
+                    <a href="https://github.com/marek-saji/jquery.encapsulating#url_box">clone from github</a>
+                </li>
+            </ul>
+        </section>
+
+
+        <section id="try">
+
+            <h2>try it out</h2>
+
+            <form method=get>
+
+                <textarea name=items cols="80" rows="7" autofocus="autofocus">
+                    OHAI, I am a tag
+                    me too!
+                </textarea>
+
+                <p>
+                    Use comma (<kbd>,</kbd>) or new lines (<kbd>enter</kbd>) to separate items. You can also navigate with <kbd>tab</kbd> and arrow keys.
+                </p>
+
+                <input type=submit value="dummy submit" />
+
+            </form>
+
+        </section>
+
+
+        <section id="use">
+
+            <h2>usage</h2>
+
+            <p>
+                Add this in your <code>&lt;head /&gt;</code>:
+
+            <pre class="prettyprint lang-js"><code>&lt;script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.min.js"&gt;&lt;&gt;
+&lt;script type="text/javascript" src="jquery.encapsulating.js"&gt;&lt;&gt;
+&lt;link rel="stylesheet" href="jquery.encapsulating.css" /&gt;
+&lt;script type="text/javascript"&gt;
+    $('textarea').encapsulating();
+&lt;/script&gt;</code></pre>
+
+        </section>
+
+
+        <section id="conf">
+
+            <h2>configuration</h2>
+
+            <p>
+                It's <a href="https://github.com/marek-saji/jquery.encapsulating/blob/b620570250c7f8797e5c52bb79158ff4328462f4/jquery.encapsulating.js#L36">configurable</a> by:
+            </p>
+
+            <ul>
+                <li>
+                    invoke arguments
+                    <pre class="prettyprint lang-js"><code>$('textarea').encapsulating({removeText: '-'});</code></pre>
+                </li>
+
+                <li>
+                    element's <a href="http://api.jquery.com/data">jQuery's element data</a>,
+                    including (since jQuery 1.4.3) <code>data-encapsulating</code> argument
+                    <pre class="prettyprint lang-html"><code>&lt;textarea data-encapsulating='{"debug":true}'&gt;&lt;/textarea&gt;</code></pre>
+                </li>
+            </ul>
+
+            <p>
+                Values specified as element data override
+                invoke configuration.
+            </p>
+
+        </section>
+
+
+        <footer>
+            <dl>
+                <dt>Author</dt>
+                <dd class="hcard">
+                    <a class="fn url" href="https://github.com/marek-saji">Marek <em>saji</em> Augustynowicz</a>
+                </dd>
+
+                <dt>License</dt>
+                <dd><a rel="license" href="https://github.com/marek-saji/jquery.encapsulating/raw/master/LICENSE.md">MIT</a>
+            </dl>
+            <a class="fork-me" href="http://github.com/marek-saji/jquery.encapsulating"><img src="https://assets0.github.com/img/71eeaab9d563c2b3c590319b398dd35683265e85?repo=&url=http%3A%2F%2Fs3.amazonaws.com%2Fgithub%2Fribbons%2Fforkme_right_gray_6d6d6d.png&path=" alt="Fork me on GitHub"></a>
+        </footer>
+
+
+        <script type="text/javascript">
+
+            if (!window.$)
+            {
+                alert("jQuery did not load.\nThis example uses external CDN -- are you connected to the internet?");
+            }
+            else
+            {
+                $(function(){
+                    $('textarea').encapsulating({
+                        //debug: true
+                    });
+                });
+            }
+
+        </script>
+
+    </body>
+
+</html>
+
