@@ -413,6 +413,12 @@
             $input_wrapper.appendTo($area);
             $input_sizer.add($input).appendTo($input_wrapper);
 
+            $('label[for="'+$textarea.attr('id')+'"]')
+                .live('click', function(e){
+                    e.preventDefault();
+                    $area.trigger('focus');
+                });
+
             // === encapsulated item ===
             // bind events to all future created items
 
