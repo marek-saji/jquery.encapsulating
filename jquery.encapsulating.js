@@ -165,8 +165,6 @@
 
             // === textarea replacement ===
             var $area = $('<label />', {
-                    width: $textarea.width(),
-                    height: $textarea.height(),
                     'class': 'encapsulating-textarea '
                              + $textarea.attr('class')
                              + (settings.debug ? ' debug' : ''),
