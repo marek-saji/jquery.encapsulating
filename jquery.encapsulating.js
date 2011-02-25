@@ -274,7 +274,8 @@
                     'class': 'encapsulating_input_sizer'
                 }),
                 $input = $('<input />',{
-                    'size': 1
+                    'size': 1,
+                    'class': 'encapsulating_input'
                 })
                 .data('encapsulating', {})
                 // ==== input keypress ====
