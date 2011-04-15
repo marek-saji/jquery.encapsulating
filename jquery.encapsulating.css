@@ -3,18 +3,19 @@
 .encapsulating-textarea {
   /* pretend to be a textarea */
 
-  background-color: white;
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
   display: block;
-  border: black solid thin;
   overflow: auto;
+  cursor: text;
   resize: auto;
   -moz-resize: auto;
-  cursor: text;
+  /* for these unfortunate browsers */
+
 }
-.encapsulating-textarea:focus, .encapsulating-textarea.focus {
-  box-shadow: 0 0 1em #bfd7f0;
-  -moz-box-shadow: 0 0 1em #bfd7f0;
-  -webkit-box-shadow: 0 0 1em #bfd7f0;
+.encapsulating-textarea.lacking-appearance {
+  background-color: white;
+  border: black solid thin;
 }
 .encapsulating-textarea.debug {
   background-color: #ddd;
@@ -73,7 +74,7 @@
   display: block;
   white-space: pre;
 }
-.encapsulating-textarea .encapsulating_input_wrapper input {
+.encapsulating-textarea .encapsulating_input_wrapper input.encapsulating_input {
   border: white solid thin;
   background-color: white;
   resize: none;

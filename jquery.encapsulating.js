@@ -163,11 +163,21 @@
             $.extend(settings, invoke_settings, $textarea.data('encapsulating'));
 
 
+            // does browser support -{moz,webkit}-appearance ?
+            var lackingAppearance = true,
+                s;
+            if (document.documentElement && (s = document.documentElement.style))
+            {
+                lackingAppearance = typeof s.MozAppearance != 'string'
+                                 && typeof s.WebkitAppearance != 'string';
+            }
+
             // === textarea replacement ===
             var $area = $('<label />', {
                     'class': 'encapsulating-textarea '
                              + $textarea.attr('class')
-                             + (settings.debug ? ' debug' : ''),
+                             + (settings.debug ? ' debug' : '')
+                             + (lackingAppearance ? ' lacking-appearance' : ''),
                     // inherit textarea-specific css properties
                     css: {
                         "resize": $textarea.css('resize'),

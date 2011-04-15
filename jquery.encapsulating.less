@@ -24,19 +24,18 @@
 
 
     /* pretend to be a textarea */
-    background-color: @bg-color;
-    display: block;
-    border: black solid thin;
-    overflow: auto;
+    -webkit-appearance : textfield;
+    -moz-appearance    : textfield;
+    display            : block;
+    overflow           : auto;
+    cursor             : text;
     .resize(auto);
-    cursor: text;
 
-    &:focus,
-    &.focus
+    /* for these unfortunate browsers */
+    &.lacking-appearance
     {
-        box-shadow: 0 0 1em @item-color;
-        -moz-box-shadow: 0 0 1em @item-color;
-        -webkit-box-shadow: 0 0 1em @item-color;
+        background-color : @bg-color;
+        border           : black solid thin;
     }
 
     &.debug
