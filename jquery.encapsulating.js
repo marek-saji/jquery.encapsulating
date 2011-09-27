@@ -184,6 +184,7 @@
                         "-moz-resize": $textarea.css('-moz-resize')
                     }
                 })
+                .data('impersonating', $textarea)
                 .data('encapsulating', {})
                 // ==== sync encapsulated items to hidden textarea ====
                 .bind('syncToTextarea.encapsulating', function(){
