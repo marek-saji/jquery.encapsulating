@@ -38,6 +38,16 @@
         border           : black solid thin;
     }
 
+    &.focus
+    {
+        /*
+        outline-color: Highlight solid thin;
+        */
+        /* webkit glow */
+        outline-offset : -2px;
+        outline        : 5px auto -webkit-focus-ring-color;
+    }
+
     &.debug
     {
         background-color: #ddd;

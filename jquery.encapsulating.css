@@ -1,83 +1,10 @@
 @charset "utf-8";
-/* vim: set ft=css fdm=indent: */
-.encapsulating-textarea {
-  /* pretend to be a textarea */
-
-  -webkit-appearance: textfield;
-  -moz-appearance: textfield;
-  display: block;
-  overflow: auto;
-  cursor: text;
-  resize: auto;
-  -moz-resize: auto;
-  /* for these unfortunate browsers */
-
-}
-.encapsulating-textarea.lacking-appearance {
-  background-color: white;
-  border: black solid thin;
-}
-.encapsulating-textarea.debug {
-  background-color: #ddd;
-}
-.encapsulating-textarea a, .encapsulating-textarea .encapsulating_input_wrapper, .encapsulating-textarea input {
-  display: block;
-  float: left;
-  margin: 0.1em;
-  padding: 0.1em;
-  line-height: 1.2em;
-  border: none;
-  outline: none;
-  font-size: 1em;
-}
-.encapsulating-textarea a {
-  color: inherit;
-  text-decoration: none;
-  background-color: #bfd7f0;
-  border: #616c5e solid thin;
-  white-space: nowrap;
-  border-radius: 0.2em;
-  -moz-border-radius: 0.2em;
-  -webkit-border-radius: 0.2em;
-  cursor: text;
-}
-.encapsulating-textarea a:hover {
-  background-color: #aec6df;
-}
-.encapsulating-textarea a:hover .remove {
-  color: inherit;
-}
-.encapsulating-textarea a:focus, .encapsulating-textarea a:active {
-  background-color: #e1f9ff;
-}
-.encapsulating-textarea a .remove {
-  cursor: default;
-  font-size: .8em;
-  color: #666;
-  margin-left: .25em;
-}
-.encapsulating-textarea .encapsulating_input_wrapper {
-  max-width: 90%;
-  /* unsafe setting, this should left space for INPUT_SIZER_SUFFIX */
-
-  margin: 0;
-  padding: 0;
-  border: 0;
-  outline: 0;
-}
-.encapsulating-textarea .encapsulating_input_wrapper .encapsulating_input_sizer {
-  height: 0;
-  max-width: 90%;
-  /* unsafe setting, this should left space for INPUT_SIZER_SUFFIX */
-
-  overflow: hidden;
-  display: block;
-  white-space: pre;
-}
-.encapsulating-textarea .encapsulating_input_wrapper input.encapsulating_input {
-  border: white solid thin;
-  background-color: white;
-  resize: none;
-  -moz-resize: none;
-  width: 100%;
-}
+.encapsulating-textarea{-webkit-appearance:textfield;-moz-appearance:textfield;display:block;overflow:auto;cursor:text;resize:auto;-moz-resize:auto;}.encapsulating-textarea.lacking-appearance{background-color:white;border:black solid thin;}
+.encapsulating-textarea.focus{outline-offset:-2px;outline:5px auto -webkit-focus-ring-color;}
+.encapsulating-textarea.debug{background-color:#ddd;}
+.encapsulating-textarea a,.encapsulating-textarea .encapsulating_input_wrapper,.encapsulating-textarea input{display:block;float:left;margin:0.1em;padding:0.1em;line-height:1.2em;border:none;outline:none;font-size:1em;}
+.encapsulating-textarea a{color:inherit;text-decoration:none;background-color:#bfd7f0;border:#616c5e solid thin;white-space:nowrap;border-radius:0.2em;-moz-border-radius:0.2em;-webkit-border-radius:0.2em;cursor:text;}.encapsulating-textarea a:hover{background-color:#aec6df;}.encapsulating-textarea a:hover .remove{color:inherit;}
+.encapsulating-textarea a:focus,.encapsulating-textarea a:active{background-color:#e1f9ff;}
+.encapsulating-textarea a .remove{cursor:default;font-size:.8em;color:#666;margin-left:.25em;}
+.encapsulating-textarea .encapsulating_input_wrapper{max-width:90%;margin:0;padding:0;border:0;outline:0;}.encapsulating-textarea .encapsulating_input_wrapper .encapsulating_input_sizer{height:0;max-width:90%;overflow:hidden;display:block;white-space:pre;}
+.encapsulating-textarea .encapsulating_input_wrapper input.encapsulating_input{border:white solid thin;background-color:white;resize:none;-moz-resize:none;width:100%;}
