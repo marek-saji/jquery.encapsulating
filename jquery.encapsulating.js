@@ -193,7 +193,10 @@
                     $area.find('a > .text').each(function(){
                         new_val.push($(this).text());
                     });
-                    $textarea.val(new_val.join("\n"));
+                    $textarea
+                        .val(new_val.join("\n"))
+                        .triggerHandler('change', [false])
+                    ;
                 }) // syncToTextarea.encapsulating event
                 // ==== encapsulate textarea contents ====
                 .bind('syncFromTextarea.encapsulating', function(){
@@ -417,8 +420,11 @@
                 $textarea.css('opacity', .5);
             else
                 $textarea.hide();
-            $textarea.bind('change', function(e){
-                $area.trigger('syncFromTextarea.encapsulating');
+            $textarea.bind('change', function (e, sync) {
+                if (sync)
+                {
+                    $area.trigger('syncFromTextarea.encapsulating');
+                }
             });
             $area.insertAfter($textarea);
             $input_wrapper.appendTo($area);
